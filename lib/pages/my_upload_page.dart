@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_instaclone/pages/my_feed_page.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MyUploadPage extends StatefulWidget {
@@ -34,12 +35,10 @@ class _MyUploadPageState extends State<MyUploadPage> {
    }
 _uploadNewPost(){
     String caption=captionController.toString().trim();
-    if(caption==null){
-      return;
-    }
-    if(_image==null){
-      return;
-    }
+
+
+
+
 }
   var captionController = TextEditingController();
 
@@ -51,7 +50,12 @@ _uploadNewPost(){
         centerTitle: true,
         title:const Text('Upload',style: TextStyle(fontFamily: 'Billabong',fontSize: 28,color: Colors.black,letterSpacing: 1,textBaseline: TextBaseline.alphabetic),),
        actions: [
-         IconButton(onPressed: _uploadNewPost, icon:const Icon(Icons.post_add,color: Color.fromARGB(245, 96, 64, 1),))
+         IconButton(onPressed: (){
+           Navigator.push(
+             context,
+             MaterialPageRoute(builder: (context) => MyFeedPage()),
+           );
+                 }, icon:const Icon(Icons.post_add,color: Color.fromARGB(245, 96, 64, 1),))
        ],
       ),
         body: SingleChildScrollView(

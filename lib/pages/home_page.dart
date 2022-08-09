@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         children: [
-          MyFeedPage(),
+          MyFeedPage(_pageController),
           MySearchPage(),
           MyUploadPage(),
           MyLikesPage(),
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             _pageController.animateToPage(_currentTap, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
           });
         },
-        activeColor: Color.fromRGBO(131, 58, 180, 1),
+        activeColor:const Color.fromRGBO(131, 58, 180, 1),
         items: const [
           BottomNavigationBarItem(
               icon: Icon(
