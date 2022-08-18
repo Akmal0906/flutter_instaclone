@@ -18,9 +18,9 @@ class MyFeedPage extends StatefulWidget {
 class _MyFeedPageState extends State<MyFeedPage> {
   List<Post> items = [];
   String post_im1 =
-      'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost.png?alt=media&token=f0b1ba56-4bf4-4df2-9f43-6b8665cdc964';
+     'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost.png?alt=media&token=f0b1ba56-4bf4-4df2-9f43-6b8665cdc964';
   String post_im2 =
-      'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost2.png?alt=media&token=ac0c131a-4e9e-40c0-a75a-88e586b28b72';
+     'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost2.png?alt=media&token=ac0c131a-4e9e-40c0-a75a-88e586b28b72';
 
   @override
   void initState() {
@@ -123,8 +123,8 @@ class _MyFeedPageState extends State<MyFeedPage> {
           // Image.network(post.postImage,fit: BoxFit.fill,),
           CachedNetworkImage(
             imageUrl: post.postImage,
-            placeholder: (context, url) => CircularProgressIndicator(),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            placeholder: (context, url) => const CircularProgressIndicator(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           //  CachedNetworkImage(
           //    imageUrl:post.postImage,
