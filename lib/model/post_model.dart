@@ -1,6 +1,6 @@
 class Post {
-  String postImage;
-  String postCaption;
+  String ?postImage;
+  String? postCaption;
 
   Post({required this.postImage, required this.postCaption});
 

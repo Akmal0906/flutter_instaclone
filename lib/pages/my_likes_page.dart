@@ -84,7 +84,7 @@ class _MyLikesPageState extends State<MyLikesPage> {
           ),
           // Image.network(post.postImage,fit: BoxFit.fill,),
           CachedNetworkImage(
-            imageUrl: post.postImage,
+            imageUrl: post.postImage!,
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
@@ -104,7 +104,7 @@ class _MyLikesPageState extends State<MyLikesPage> {
           Container(
               padding:const EdgeInsets.symmetric(horizontal: 10),
               alignment: Alignment.centerLeft,
-              child: Text(post.postCaption,style:const TextStyle(color: Colors.black,fontSize: 17),))
+              child: Text(post.postCaption!,style:const TextStyle(color: Colors.black,fontSize: 17),))
         ],
       ),
     );

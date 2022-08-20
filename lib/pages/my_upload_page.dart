@@ -21,7 +21,6 @@ class MyUploadPage extends StatefulWidget {
 }
 
 class _MyUploadPageState extends State<MyUploadPage> {
-  String saveImage;
   File _image;
 
   _imgFromGallery() async {
@@ -42,18 +41,33 @@ class _MyUploadPageState extends State<MyUploadPage> {
     });
   }
 
-  _uploadNewPost() {
+  Future _uploadNewPost() async {
     String caption = captionController.text.toString().trim();
+
     if (caption != '' && _image != null) {
-
-        Post post = Post(postImage: _image.toString(), postCaption: caption);
-
+      setState(() {
+        print("path ${_image.path}");  
+        Post post = Post(postImage: _image.path, postCaption: caption);
+        HiveDB().storeImage(_image.path);
         context.read<ContentBloc>().add(AddPostEvent(post));
-        widget.pageController.animateToPage(0,
-            duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
+      });
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MyFeedPage(widget.pageController, true)));
+      // widget.pageController.animateToPage(0,
+      //  duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
       //}
-    // );
+      // );
     }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    HiveDB().removeImage();
   }
 
   var captionController = TextEditingController();

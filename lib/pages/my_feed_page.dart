@@ -1,15 +1,19 @@
+// @dart=2.9
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_instaclone/bloc/content_bloc.dart';
+import 'package:flutter_instaclone/services/local_database.dart';
 import '../model/post_model.dart';
 
 class MyFeedPage extends StatefulWidget {
-  PageController? pageController;
-  bool? addPost;
+  PageController pageController;
+  bool addPost;
 
-  MyFeedPage([this.pageController,this.addPost]);
+  MyFeedPage([this.pageController, this.addPost]);
 
   @override
   State<MyFeedPage> createState() => _MyFeedPageState();
@@ -18,17 +22,23 @@ class MyFeedPage extends StatefulWidget {
 class _MyFeedPageState extends State<MyFeedPage> {
   List<Post> items = [];
   String post_im1 =
-     'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost.png?alt=media&token=f0b1ba56-4bf4-4df2-9f43-6b8665cdc964';
+      'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost.png?alt=media&token=f0b1ba56-4bf4-4df2-9f43-6b8665cdc964';
   String post_im2 =
-     'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost2.png?alt=media&token=ac0c131a-4e9e-40c0-a75a-88e586b28b72';
+      'https://firebasestorage.googleapis.com/v0/b/koreanguideway.appspot.com/o/develop%2Fpost2.png?alt=media&token=ac0c131a-4e9e-40c0-a75a-88e586b28b72';
 
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
     items.add(Post(postImage: post_im1, postCaption: 'This is post caption'));
     items.add(Post(postImage: post_im2, postCaption: 'This is post caption'));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    HiveDB().removeImage();
   }
 
   @override
@@ -47,7 +57,7 @@ class _MyFeedPageState extends State<MyFeedPage> {
         actions: [
           IconButton(
               onPressed: () {
-                widget.pageController!.animateToPage(2,
+                widget.pageController.animateToPage(2,
                     duration: const Duration(milliseconds: 100),
                     curve: Curves.easeIn);
               },
@@ -62,7 +72,7 @@ class _MyFeedPageState extends State<MyFeedPage> {
           return ListView.builder(
             itemCount: state.posts.length,
             itemBuilder: (BuildContext context, int index) {
-              return _itemOfPost(state.posts[index]);
+              return _itemOfPost(state.posts[index], index);
             },
           );
         },
@@ -70,7 +80,7 @@ class _MyFeedPageState extends State<MyFeedPage> {
     );
   }
 
-  Widget _itemOfPost(Post post) {
+  Widget _itemOfPost(Post post, int index) {
     return Container(
       color: Colors.white,
       child: Column(
@@ -110,7 +120,7 @@ class _MyFeedPageState extends State<MyFeedPage> {
                           'February 2,2022',
                           style:
                               TextStyle(color: Colors.black, letterSpacing: 1),
-                        )
+                        ),
                       ],
                     )
                   ],
@@ -120,18 +130,14 @@ class _MyFeedPageState extends State<MyFeedPage> {
               ],
             ),
           ),
-          // Image.network(post.postImage,fit: BoxFit.fill,),
-          CachedNetworkImage(
-            imageUrl: post.postImage,
-            placeholder: (context, url) => const CircularProgressIndicator(),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-          ),
-          //  CachedNetworkImage(
-          //    imageUrl:post.postImage,
-          //    progressIndicatorBuilder: (context, url, downloadProgress) =>
-          //        CircularProgressIndicator(value: downloadProgress.progress),
-          //    errorWidget: (context, url, error) => Icon(Icons.error),
-          //  ),
+          (widget.addPost == true && index == 0)
+              ? Image.file(File(HiveDB().loadImage()))
+              : CachedNetworkImage(
+                  imageUrl: post.postImage,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
           Row(
             children: [
               IconButton(

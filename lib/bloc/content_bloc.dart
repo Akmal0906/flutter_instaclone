@@ -1,8 +1,6 @@
-import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 import '../model/post_model.dart';
 

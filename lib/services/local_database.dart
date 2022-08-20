@@ -1,17 +1,23 @@
+// @dart=2.9
+import 'dart:io';
+
 import 'package:hive/hive.dart';
 
 import '../model/post_model.dart';
 
-class HiveDB{
-  var box=Hive.box('uic_database');
-  void storePost(Post post){
-    box.put('post',post);
+class HiveDB {
+  var box = Hive.box('uic_database');
+
+  void storeImage(final _image) {
+    box.put('_image', _image);
   }
-  Post loadPost(){
-    var post=Post.fromJson(box.get('post'));
-    return post;
+
+   loadImage() {
+    final  _image = box.get('_image');
+    return _image;
   }
-  void removePost(){
-    box.delete('post');
+
+  void removeImage() {
+    box.delete('_image');
   }
 }
