@@ -19,6 +19,7 @@ class ContentState extends Equatable {
   ];
 }
 
+
 enum GetPostStatus {
   in_progress,
   success,

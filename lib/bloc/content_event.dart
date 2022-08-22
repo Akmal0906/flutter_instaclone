@@ -15,3 +15,12 @@ class GetPosts extends ContentEvent{
   @override
   List<Object?> get props => [];
 }
+class GetIndex extends ContentEvent{
+  final index;
+  const GetIndex({required this.index});
+  @override
+
+  List<Object?> get props =>[index];
+
+
+}
