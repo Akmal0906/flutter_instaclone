@@ -3,10 +3,11 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_instaclone/pages/signin_page.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../model/post_model.dart';
+import '../services/auth_service.dart';
 
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({Key key}) : super(key: key);
@@ -21,20 +22,20 @@ class _MyProfilePageState extends State<MyProfilePage> {
   File _image;
 
   _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
+    XFile image = await ImagePicker().pickImage(
         source: ImageSource.gallery, imageQuality: 50);
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
   _imgFromCamera() async {
-    File image = await ImagePicker.pickImage(
+    XFile image = await ImagePicker().pickImage(
         source: ImageSource.camera, imageQuality: 50);
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
@@ -50,7 +51,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
     items.add(Post(postImage: post_im1, postCaption: 'This is post caption'));
     items.add(Post(postImage: post_im2, postCaption: 'This is post caption'));
   }
-  var _selectedCount=1;
+
+  var _selectedCount = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +67,15 @@ class _MyProfilePageState extends State<MyProfilePage> {
             style: TextStyle(
                 color: Colors.black, fontSize: 25, fontFamily: 'Billabong'),
           ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  AuthService.signOutUser(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const SignInPage()));
+
+                },
+                icon: const Icon(Icons.exit_to_app,color: Colors.black,))
+          ],
         ),
         body: Container(
           padding: const EdgeInsets.all(10),
@@ -217,22 +229,32 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 height: 40,
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(onPressed: (){
-                      setState(() {
-                        _selectedCount=2;
-                      });
-                    }, icon: Icon(Icons.account_balance)),
-                    IconButton(onPressed: (){
-                      setState(() {
-                        _selectedCount=1;
-                      });
-                    }, icon: Icon(Icons.account_balance_wallet)),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _selectedCount = 2;
+                          });
+                        },
+                        icon: const Icon(Icons.account_balance)),
+                    IconButton(
+                        color: Colors.deepOrange,
+                        // tooltip: 'hrwerwerewfergergergergergergergergergergergergergeri',splashColor: Colors.deepPurpleAccent,
+                        //  splashColor: Colors.lime,
+                        //  focusColor: Colors.teal,
+                        hoverColor: Colors.red,
+                        alignment: Alignment.bottomCenter,
+                        onPressed: () {
+                          setState(() {
+                            _selectedCount = 1;
+                          });
+                        },
+                        icon: const Icon(Icons.account_balance_wallet)),
                   ],
                 ),
               ),

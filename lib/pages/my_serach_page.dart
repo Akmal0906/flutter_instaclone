@@ -12,25 +12,25 @@ class MySearchPage extends StatefulWidget {
 
 class _MySearchPageState extends State<MySearchPage> {
   final _searchController = TextEditingController();
-  List<User> items = [];
+  List<Users> items = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
-    items.add(User(fullName: 'Akamljon', email: 'akmal@gmail.com'));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', password: '', cpassword: '', id: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', cpassword: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', password: '', cpassword: '', id: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', cpassword: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', password: '', cpassword: '', id: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', cpassword: ''));
+    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+
   }
 
   @override
@@ -80,7 +80,7 @@ class _MySearchPageState extends State<MySearchPage> {
         ));
   }
 
-  Widget _itemOfUser(User user) {
+  Widget _itemOfUser(Users user) {
     return SizedBox(
       height: 90,
       child: Row(
@@ -111,7 +111,7 @@ class _MySearchPageState extends State<MySearchPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                user.fullName,
+                user.name,
                 style:const TextStyle(color: Colors.black, fontSize: 17),
               ),
            const   SizedBox(height: 3,),

@@ -24,20 +24,20 @@ class _MyUploadPageState extends State<MyUploadPage> {
   File _image;
 
   _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
+    XFile image = await ImagePicker().pickImage(
         source: ImageSource.gallery, imageQuality: 50);
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 
   _imgFromCamera() async {
-    File image = await ImagePicker.pickImage(
+    XFile image = await ImagePicker().pickImage(
         source: ImageSource.camera, imageQuality: 50);
 
     setState(() {
-      _image = image;
+      _image = File(image.path);
     });
   }
 

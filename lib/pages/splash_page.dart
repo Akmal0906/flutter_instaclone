@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_instaclone/pages/main_page.dart';
 import 'package:flutter_instaclone/pages/signin_page.dart';
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     });
   }
   _callSignInPage(){
-    Navigator.pushReplacementNamed(context, SignInPage.id);
+    Navigator.pushReplacementNamed(context,MainPage.id);
   }
   @override
   void initState() {

@@ -1,9 +1,15 @@
+// @dart=2.9
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instaclone/pages/home_page.dart';
 import 'package:flutter_instaclone/pages/signup_page.dart';
 
+import '../services/auth_service.dart';
+import '../services/prefs_service.dart';
+import '../services/utilis_service.dart';
+
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key key}) : super(key: key);
   static const String id = 'signin_page';
 
   @override
@@ -15,12 +21,27 @@ class _SignInPageState extends State<SignInPage> {
   _callSignUpPage(){
     Navigator.pushNamed(context, SignUpPage.id);
   }
-  _callHomePage(){
-    Navigator.pushReplacementNamed(context, HomePage.id);
-  }
+
   var emailController=TextEditingController();
   var passwordController=TextEditingController();
-
+  void doSignIn(){
+    final email=emailController.text.toString().trim();
+    final password=passwordController.text.toString().trim();
+    if(email==null && password==null){
+      return;
+    }
+    AuthService.signInUser(context, password, email).then((user) =>{
+      getFirebaseUser(user),
+    });
+  }
+  getFirebaseUser(User user)async{
+    if(user!=null){
+      Prefs().storeId(user.uid);
+      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const HomePage()));
+    }else{
+      Utilis.fireToast('Please check email or password');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   const  SizedBox(height: 50,),
                   GestureDetector(
-                    onTap: _callHomePage,
+                    onTap:()=> doSignIn(),
                     child: Container(
                       height: 50,
                       margin:const EdgeInsets.only(left: 10,right: 10),
