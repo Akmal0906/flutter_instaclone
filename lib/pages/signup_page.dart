@@ -3,6 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instaclone/pages/signin_page.dart';
+import 'package:flutter_instaclone/services/data_service.dart';
 
 import '../model/user_model.dart';
 import '../services/auth_service.dart';
@@ -44,18 +45,32 @@ class _SignUpPageState extends State<SignUpPage> {
         passvalid == false &&
         cpassword != cpassword &&
         namevalid == false) {
+      print('true');
       return;
     }
-    AuthService.signUpUser(context, name, email, password).then((user) => {
-          getFirebaseUser(user),
+    Users users=Users(fullName: name, email: email, password: password, id: 7.toString(), imageUrl:'');
+    AuthService.signUpUser(context, name, email, password).then((value) => {
+          getFirebaseUser(users,value),
         });
   }
 
-  getFirebaseUser(User user) {
+  getFirebaseUser(Users users,Map<String,User>map) {
+    User user;
+    if(map.containsKey('Success')){
+      if(map.containsKey('Email already use')){
+        Utilis.fireToast('Email already use');
+        if(map.containsKey('Error')){
+          Utilis.fireToast('TRY AGAIN LATER');
+          return;
+        }
+      }
+    }
     if (user != null) {
       Prefs().storeId(user.uid);
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const HomePage()));
+      DataService.storeUser(users).then((value) =>  Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const HomePage())));
+
+
     } else {
       Utilis.fireToast('check your email or password');
     }

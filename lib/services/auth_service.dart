@@ -21,18 +21,26 @@ class AuthService {
     return null;
   }
 
-  static Future<User?> signUpUser(
+  static Future<Object?> signUpUser(
       BuildContext context, String name, String email, String password) async {
+      Map<String,User?>map={};
     try {
       var authResult = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final User? user = authResult.user;
+      map.addAll({'Success':user});
       print('user result ${user.toString()}');
       return user;
-    } catch (e) {
-      print('e=====$e');
+    } catch (error) {
+      print('e=====$error');
+      switch(error.hashCode.toString()){
+        case 'Email already use':map.addAll({'Email already used it':null});
+        break;
+        default:map.addAll({'Error':null});
+
+      }
     }
-    return null;
+    return map;
   }
 
   static signOutUser(BuildContext context) {

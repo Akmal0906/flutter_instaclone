@@ -18,18 +18,18 @@ class _MySearchPageState extends State<MySearchPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', password: '', cpassword: '', id: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', cpassword: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', password: '', cpassword: '', id: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', cpassword: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', password: '', cpassword: '', id: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', cpassword: ''));
-    items.add(Users(name: 'Akamljon', email: 'akmal@gmail.com', id: '', cpassword: '', password: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', password: '', imageUrl: '', id: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', imageUrl: '', password: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', imageUrl: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', imageUrl: '', password: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', password: '', imageUrl: '', id: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', imageUrl: '', password: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', imageUrl: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', imageUrl: '', password: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', password: '', imageUrl: '', id: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', imageUrl: '', password: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', password: '', imageUrl: ''));
+    items.add(Users(fullName: 'Akamljon', email: 'akmal@gmail.com', id: '', imageUrl: '', password: ''));
 
   }
 
@@ -111,7 +111,7 @@ class _MySearchPageState extends State<MySearchPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                user.name,
+                user.fullName,
                 style:const TextStyle(color: Colors.black, fontSize: 17),
               ),
            const   SizedBox(height: 3,),
